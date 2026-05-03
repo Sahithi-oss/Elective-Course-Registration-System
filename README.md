@@ -1,4 +1,5 @@
 # University ERP System
+Developed by [Sahithi-oss](https://github.com/Sahithi-oss)
 
 A Spring Boot application for managing university electives, timetables, and student/faculty dashboards.
 
