@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>GALEX Portal Login</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="login-page">
+
+    <div class="login-box">
+
+        <h2>GALEX Portal</h2>
+
+        <form onsubmit="loginUser(event)">
+
+            <input type="email" id="email" placeholder="Email" required>
+            <input type="password" id="password" placeholder="Password" required>
+
+            <button type="submit">Login</button>
+            
+            <div style="text-align: center; margin-top: 15px;">
+                <a href="#" onclick="resetPassword()" style="color: var(--primary-color); font-size: 14px; text-decoration: none;">Forgot Password?</a>
+            </div>
+
+        </form>
+
+    </div>
+
+    <script>
+        function resetPassword() {
+            const email = prompt("Enter your university email address to reset your password:");
+            if (email) {
+                if (email.includes("@")) {
+                    alert("A password reset link has been sent to " + email + ". Please check your inbox.");
+                } else {
+                    alert("Please enter a valid email address.");
+                }
+            }
+        }
+        async function loginUser(event) {
+            event.preventDefault();
+            let emailInput = document.getElementById("email").value;
+            let passwordInput = document.getElementById("password").value;
+
+            // Frontend Fallback Credentials
+            const hardcodedUsers = [
+                { name: "Admin", email: "admin@mahindrauniversity.edu.in", password: "admin123", role: "admin", semester: "-", cgpa: "-", gender: "Female" },
+                { name: "Faculty", email: "faculty@mahindrauniversity.edu.in", password: "faculty123", role: "faculty", semester: "-", cgpa: "-", gender: "Male" },
+                { name: "Professor", email: "professor@mahindrauniversity.edu.in", password: "prof123", role: "faculty", semester: "-", cgpa: "-", gender: "Male" }
+            ];
+
+            const match = hardcodedUsers.find(u => u.email === emailInput && u.password === passwordInput);
+
+            if (match) {
+                const displayRole = match.role === "admin" ? "Admin" : (match.role === "faculty" ? "Faculty" : "Student");
+                alert("Login Successful! Welcome " + displayRole);
+                localStorage.setItem("user", JSON.stringify(match));
+                window.location.href = "student.html"; // Unified Dashboard handles role routing natively
+                return;
+            }
+
+            try {
+                const response = await fetch('http://localhost:8080/api/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ email: emailInput, password: passwordInput })
+                });
+
+                const data = await response.json();
+                alert(data.message);
+
+                if (response.ok) {
+                    localStorage.setItem("user", JSON.stringify(data.user));
+                    // Redirect everyone to student.html -> the unified UI system handles the role mapping
+                    window.location.href = "student.html";
+                }
+            } catch (error) {
+                console.error("Error:", error);
+                alert("Invalid Credentials or Server error. Try fallback accounts.");
+            }
+        }
+    </script>
+
+</body>
+
+</html>

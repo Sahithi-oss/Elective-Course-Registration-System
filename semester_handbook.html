@@ -1,0 +1,1054 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>6th Semester Academic Handbook - Spring 2026</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #1b332c;
+            --primary-light: #2d5a4c;
+            --accent: #f39c12;
+            --bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text-dark: #1e293b;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+            --radius: 16px;
+            --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg);
+            color: var(--text-dark);
+            line-height: 1.6;
+            scroll-behavior: smooth;
+        }
+
+        /* Navigation */
+        nav {
+            background: var(--primary);
+            color: white;
+            padding: 1.5rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-logo { font-weight: 800; font-size: 1.5rem; letter-spacing: -0.5px; }
+        .nav-links { display: flex; gap: 2rem; list-style: none; }
+        .nav-links a { color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: var(--transition); }
+        .nav-links a:hover { color: white; }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 3rem 2rem; }
+
+        /* Header Section */
+        header {
+            text-align: center;
+            margin-bottom: 5rem;
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white;
+            border-radius: var(--radius);
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: url('https://www.transparenttextures.com/patterns/cubes.png');
+            opacity: 0.1;
+        }
+
+        header h1 { font-size: 3.5rem; font-weight: 800; margin-bottom: 1rem; }
+        header p { font-size: 1.2rem; opacity: 0.9; max-width: 700px; margin: 0 auto; }
+
+        /* Section Styling */
+        section { margin-bottom: 6rem; }
+        .section-title {
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin-bottom: 2.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            color: var(--primary);
+        }
+        .section-title i { color: var(--accent); font-size: 1.8rem; }
+
+        /* Cards Grid */
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2rem; }
+
+        .card {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+            transition: var(--transition);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card:hover { transform: translateY(-5px); box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1); }
+
+        .card h3 { font-size: 1.4rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--primary); }
+        .card .code { font-size: 0.85rem; font-weight: 700; color: var(--accent); text-transform: uppercase; margin-bottom: 1rem; display: block; }
+        .card .meta { display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.5rem; font-size: 0.9rem; color: var(--text-muted); }
+        .card .meta span { display: flex; align-items: center; gap: 0.4rem; }
+        .card p { font-size: 0.95rem; margin-bottom: 1.5rem; flex-grow: 1; }
+
+        .tag {
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+        }
+
+        .tag-core { background: #e0f2fe; color: #0369a1; }
+        .tag-elective { background: #fef3c7; color: #92400e; }
+        .tag-liberal { background: #fce7f3; color: #9d174d; }
+
+        /* Timetable */
+        .timetable-container {
+            overflow-x: auto;
+            background: white;
+            padding: 2rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+        }
+
+        table { width: 100%; border-collapse: collapse; min-width: 900px; }
+        th, td { padding: 1.2rem; border-bottom: 1px solid var(--border); text-align: left; }
+        th { background: #f8fafc; font-weight: 700; color: var(--primary); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; }
+        td { font-size: 0.9rem; }
+        .time-col { font-weight: 700; color: var(--text-muted); width: 140px; }
+        .slot-filled { background: #f1f5f9; border-radius: 8px; padding: 0.8rem; border-left: 4px solid var(--primary); }
+        .slot-elective { border-left-color: var(--accent); background: #fffcf0; }
+        .slot-liberal { border-left-color: #ec4899; background: #fff1f2; }
+
+        /* Syllabus Section */
+        .syllabus-item {
+            background: white;
+            border-radius: var(--radius);
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+            overflow: hidden;
+        }
+
+        .syllabus-header {
+            padding: 2rem;
+            background: #f8fafc;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .syllabus-header h4 { font-size: 1.3rem; font-weight: 700; color: var(--primary); }
+        .syllabus-content { padding: 2.5rem; display: none; }
+        .syllabus-content.active { display: block; }
+
+        .unit-title { font-weight: 700; color: var(--primary); margin-bottom: 0.5rem; display: block; margin-top: 1.5rem; border-bottom: 2px solid #f1f5f9; padding-bottom: 0.5rem; }
+        .unit-content { font-size: 0.95rem; color: var(--text-muted); margin-bottom: 1.5rem; }
+
+        .books-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2rem; }
+        .books-list h5 { font-weight: 700; margin-bottom: 1rem; color: var(--text-dark); }
+        .books-list ul { list-style: none; }
+        .books-list li { margin-bottom: 0.5rem; font-size: 0.9rem; display: flex; align-items: flex-start; gap: 0.6rem; }
+        .books-list li::before { content: '\f02d'; font-family: 'Font Awesome 6 Free'; font-weight: 900; color: var(--accent); margin-top: 3px; }
+
+        .evaluation-box {
+            background: var(--primary);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-top: 2rem;
+            display: flex;
+            justify-content: space-around;
+            text-align: center;
+        }
+        .eval-item span { display: block; font-size: 0.8rem; opacity: 0.8; }
+        .eval-item b { font-size: 1.2rem; display: block; }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            header h1 { font-size: 2.5rem; }
+            .nav-links { display: none; }
+            .grid { grid-template-columns: 1fr; }
+            .books-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="nav-logo">GALEX <span style="color: var(--accent);">3-2</span></div>
+        <ul class="nav-links">
+            <li><a href="#overview">Overview</a></li>
+            <li><a href="#core">Core Subjects</a></li>
+            <li><a href="#electives">Electives</a></li>
+            <li><a href="#timetable">Timetable</a></li>
+            <li><a href="#syllabus">Syllabus</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <header id="overview">
+            <h1>6th Semester Handbook</h1>
+            <p>Welcome to Semester 3-2. This semester focuses on Advanced Engineering specializations, including Deep Learning, Big Data Analytics, and specialized Program Electives tailored for career readiness.</p>
+        </header>
+
+        <section id="core">
+            <h2 class="section-title"><i class="fas fa-book-open"></i> Core Subjects</h2>
+            <div class="grid">
+                <!-- DNN -->
+                <div class="card">
+                    <span class="tag tag-core">Core</span>
+                    <span class="code">CS3223</span>
+                    <h3>Deep Neural Networks</h3>
+                    <div class="meta">
+                        <span><i class="fas fa-graduation-cap"></i> Credits: 3</span>
+                        <span><i class="fas fa-user-tie"></i> Dr. Neeraj / Dr. Dheeraj</span>
+                    </div>
+                    <p>Foundational course on Neural Networks, covering architectures from basic Perceptrons to advanced CNNs and RNNs.</p>
+                </div>
+
+                <!-- SE -->
+                <div class="card">
+                    <span class="tag tag-core">Core</span>
+                    <span class="code">CS3201</span>
+                    <h3>Software Engineering</h3>
+                    <div class="meta">
+                        <span><i class="fas fa-graduation-cap"></i> Credits: 3</span>
+                        <span><i class="fas fa-user-tie"></i> Dr. Avinash / Guest</span>
+                    </div>
+                    <p>Detailed study of Software Development Life Cycle (SDLC), Agile methodologies, and software quality assurance.</p>
+                </div>
+
+                <!-- Big Data -->
+                <div class="card">
+                    <span class="tag tag-core">Core</span>
+                    <span class="code">CS3207</span>
+                    <h3>Big Data Analytics</h3>
+                    <div class="meta">
+                        <span><i class="fas fa-graduation-cap"></i> Credits: 3</span>
+                        <span><i class="fas fa-user-tie"></i> Dr. P. Alapati</span>
+                    </div>
+                    <p>Exploration of data management at scale using Hadoop, Spark, and advanced analytical techniques for large datasets.</p>
+                </div>
+
+                <!-- CN -->
+                <div class="card">
+                    <span class="tag tag-core">Core</span>
+                    <span class="code">CS2202</span>
+                    <h3>Computer Networks</h3>
+                    <div class="meta">
+                        <span><i class="fas fa-graduation-cap"></i> Credits: 3</span>
+                        <span><i class="fas fa-user-tie"></i> Dr. Tauheed</span>
+                    </div>
+                    <p>Deep dive into OSI layers, TCP/IP protocol suite, routing algorithms, and network security fundamentals.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="electives">
+            <h2 class="section-title"><i class="fas fa-layer-group"></i> Program Electives</h2>
+            
+            <h4 style="margin-bottom: 1.5rem; color: var(--primary); text-transform: uppercase; letter-spacing: 1px;">CSE / AI Specializations</h4>
+            <div class="grid">
+                <div class="card">
+                    <span class="tag tag-elective">Elective</span>
+                    <span class="code">CS3126</span>
+                    <h3>Natural Language Processing</h3>
+                    <div class="meta"><span><i class="fas fa-user-tie"></i> Dr. Sanathan</span></div>
+                    <p>Tokenization, POS tagging, Parsing, Word Embeddings, and Large Language Models (LLMs).</p>
+                </div>
+                <div class="card">
+                    <span class="tag tag-elective">Elective</span>
+                    <span class="code">CS5202</span>
+                    <h3>GenAI & LLM</h3>
+                    <div class="meta"><span><i class="fas fa-user-tie"></i> Dr. Nidhi</span></div>
+                    <p>Generative Adversarial Networks, Transformer architectures, and Fine-tuning Large Language Models.</p>
+                </div>
+                <div class="card">
+                    <span class="tag tag-elective">Elective</span>
+                    <span class="code">CS4178</span>
+                    <h3>Modern Cryptography</h3>
+                    <div class="meta"><span><i class="fas fa-user-tie"></i> Dr. Ravi Kishore</span></div>
+                    <p>Public-key infra, AES, RSA, Hash functions, and Quantum-resistant algorithms.</p>
+                </div>
+            </div>
+
+            <h4 style="margin: 3rem 0 1.5rem; color: var(--primary); text-transform: uppercase; letter-spacing: 1px;">Mechanical / Civil / Bio / ECE</h4>
+            <div class="grid">
+                <div class="card">
+                    <span class="tag tag-elective">Elective</span>
+                    <span class="code">ME3205</span>
+                    <h3>ML for Engineers</h3>
+                    <div class="meta"><span><i class="fas fa-user-tie"></i> Dr. Jagan</span></div>
+                    <p>Application of machine learning algorithms to mechanical systems and predictive maintenance.</p>
+                </div>
+                <div class="card">
+                    <span class="tag tag-elective">Elective</span>
+                    <span class="code">CE3212</span>
+                    <h3>Design of Steel Structures</h3>
+                    <div class="meta"><span><i class="fas fa-user-tie"></i> Dr. Atta</span></div>
+                    <p>Structural engineering focusing on steel design, connections, and load resistance.</p>
+                </div>
+                <div class="card">
+                    <span class="tag tag-elective">Elective</span>
+                    <span class="code">BT3220</span>
+                    <h3>Synthetic Biology</h3>
+                    <div class="meta"><span><i class="fas fa-user-tie"></i> Dr. Gouripriya</span></div>
+                    <p>Engineering biological systems for novel purposes through genetic manipulation.</p>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2 class="section-title"><i class="fas fa-globe"></i> Open & Liberal Electives</h2>
+            <div class="grid">
+                <div class="card" style="border-top: 5px solid #ec4899;">
+                    <span class="tag tag-liberal">HSS / IKS</span>
+                    <span class="code">HS3001</span>
+                    <h3>Cyber Law & Ethics</h3>
+                    <div class="meta">
+                        <span><i class="fas fa-star"></i> 2 Credits</span>
+                        <span><i class="fas fa-user-tie"></i> Prof. Neha Gupta</span>
+                    </div>
+                    <p>A crucial 2-credit course covering the legal landscape of cyberspace, data privacy, and digital forensics.</p>
+                </div>
+                <div class="card" style="border-top: 5px solid #ec4899;">
+                    <span class="tag tag-liberal">Liberal Arts</span>
+                    <span class="code">HS3002</span>
+                    <h3>Psychology in Tech</h3>
+                    <div class="meta">
+                        <span><i class="fas fa-star"></i> 2 Credits</span>
+                        <span><i class="fas fa-user-tie"></i> Dr. J. Srinath</span>
+                    </div>
+                    <p>Understanding cognitive design principles and human-computer interaction from a psychological lens.</p>
+                </div>
+                <div class="card" style="border-top: 5px solid #ec4899;">
+                    <span class="tag tag-liberal">Sustainability</span>
+                    <span class="code">ES3001</span>
+                    <h3>Green Engineering</h3>
+                    <div class="meta">
+                        <span><i class="fas fa-star"></i> 2 Credits</span>
+                        <span><i class="fas fa-user-tie"></i> Dr. Keerthi</span>
+                    </div>
+                    <p>Sustainable design practices and environmental impact assessment in engineering projects.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="branch-electives">
+            <h2 class="section-title"><i class="fas fa-sitemap"></i> Electives by Department</h2>
+            <div class="timetable-container">
+                <table style="text-align: left;">
+                    <thead>
+                        <tr>
+                            <th style="width: 150px;">Department</th>
+                            <th>Program Electives Available (Spring 2026)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="font-weight: 700; color: var(--primary);">Computer Science (CSE/AI)</td>
+                            <td>
+                                <b>CS3126</b> NLP | <b>CS5202</b> GenAI & LLM | <b>CS4178</b> Cryptography | <b>CS3224</b> Recommender Systems | 
+                                <b>CS4122</b> Reinforcement Learning | <b>CS3236</b> Usability Engg | <b>CS4164</b> Sensor Networks | <b>CS4179</b> Info Security
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: 700; color: var(--primary);">Electronics (ECE/ECM)</td>
+                            <td>
+                                <b>EC5220</b> RTOS | <b>EC5253</b> Wireless Security | <b>EC3202</b> Wireless Comm | <b>EC3206</b> Architecture | <b>EC3211</b> SCM
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: 700; color: var(--primary);">Mechanical (ME)</td>
+                            <td>
+                                <b>ME3205</b> ML for Engineers | <b>ME3251</b> Turbo-machinery | <b>ME3252</b> Alt Energy | <b>ME3261</b> Turbine Structures | <b>ME3262</b> Lighter Than Air
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: 700; color: var(--primary);">Biotech & Bioinfo</td>
+                            <td>
+                                <b>BT3209</b> Bioinformatics | <b>BT3220</b> Synthetic Bio | <b>BT3221</b> Food Nutrition | <b>BT3007</b> Metabolic Disorders | <b>BT3008</b> RNA Therapeutics
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: 700; color: var(--primary);">Civil Engineering</td>
+                            <td>
+                                <b>CE3212</b> Steel Design | <b>CE3214</b> Construction Mgmt | <b>CE3215</b> Env Engineering | <b>CE3211</b> Transportation II
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section id="timetable">
+            <h2 class="section-title"><i class="fas fa-calendar-alt"></i> Weekly Timetable</h2>
+            <div class="timetable-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="time-col">Time Slot</th>
+                            <th>Monday</th>
+                            <th>Tuesday</th>
+                            <th>Wednesday</th>
+                            <th>Thursday</th>
+                            <th>Friday</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="time-col">08:25 - 09:20</td>
+                            <td><div class="slot-filled">Programming Workshop (CS3204)</div></td>
+                            <td><div class="slot-filled">Software Eng (CS3201)</div></td>
+                            <td><div class="slot-filled">Deep Neural Networks (CS3223)</div></td>
+                            <td><div class="slot-filled">Intro to Prof Dev (HS3201)</div></td>
+                            <td><div class="slot-filled">WebTech Workshop (CS3206)</div></td>
+                        </tr>
+                        <tr>
+                            <td class="time-col">09:25 - 10:20</td>
+                            <td><div class="slot-filled">Math Foundations ML (MA3219)</div></td>
+                            <td><div class="slot-filled">Software Eng (CS3201)</div></td>
+                            <td><div class="slot-filled">Deep Neural Networks (CS3223)</div></td>
+                            <td><div class="slot-filled">Intro to Prof Dev (HS3201)</div></td>
+                            <td><div class="slot-filled">WebTech Workshop (CS3206)</div></td>
+                        </tr>
+                        <tr>
+                            <td class="time-col">10:35 - 11:30</td>
+                            <td><div class="slot-filled">Software Eng (CS3201)</div></td>
+                            <td><div class="slot-filled">Principles of Wireless (EC3202)</div></td>
+                            <td><div class="slot-filled">Software Eng (CS3201)</div></td>
+                            <td><div class="slot-filled">Cryptography (CS4178)</div></td>
+                            <td><div class="slot-filled">Math Methods Image (MA3221)</div></td>
+                        </tr>
+                        <tr>
+                            <td class="time-col">11:35 - 12:30</td>
+                            <td><div class="slot-filled">Big Data Analytics (CS3207)</div></td>
+                            <td><div class="slot-filled">Big Data Analytics (CS3207)</div></td>
+                            <td><div class="slot-filled">Big Data Analytics (CS3207)</div></td>
+                            <td><div class="slot-filled">Performance Modeling (CS5203)</div></td>
+                            <td><div class="slot-filled">Performance Modeling (CS5203)</div></td>
+                        </tr>
+                        <tr>
+                            <td colspan="6" style="text-align: center; background: #f1f5f9; font-weight: 700; color: var(--text-muted);">LUNCH BREAK (12:35 - 01:30)</td>
+                        </tr>
+                        <tr>
+                            <td class="time-col">01:35 - 02:30</td>
+                            <td><div class="slot-filled">Deep Neural Networks (CS3223)</div></td>
+                            <td><div class="slot-filled">Employability Skills (Lecture)</div></td>
+                            <td><div class="slot-filled" style="background: #e2e8f0;">Seminar/Workshops</div></td>
+                            <td><div class="slot-filled">Inf. Security (CS4179)</div></td>
+                            <td><div class="slot-liberal">Liberal Art Electives</div></td>
+                        </tr>
+                        <tr>
+                            <td class="time-col">02:35 - 03:30</td>
+                            <td><div class="slot-filled">Computer Networks (CS2202)</div></td>
+                            <td><div class="slot-filled">Machine Learning (ME3205)</div></td>
+                            <td><div class="slot-filled" style="background: #e2e8f0;">Seminar/Workshops</div></td>
+                            <td><div class="slot-filled">Computer Networks (CS2202)</div></td>
+                            <td><div class="slot-liberal">Liberal Art Electives</div></td>
+                        </tr>
+                        <tr>
+                            <td class="time-col">03:35 - 04:30</td>
+                            <td><div class="slot-elective">Reinforcement Learning (CS4122)</div></td>
+                            <td><div class="slot-liberal">Liberal Art Electives</div></td>
+                            <td><div class="slot-filled" style="background: #e2e8f0;">Seminar/Workshops</div></td>
+                            <td><div class="slot-filled">Big Data Analytics (CS3207)</div></td>
+                            <td><div class="slot-filled">Inf. Security (CS4179)</div></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section id="syllabus">
+            <h2 class="section-title"><i class="fas fa-file-alt"></i> Detailed Syllabus Section</h2>
+            
+            <!-- DNN Syllabus -->
+            <div class="syllabus-item">
+                <div class="syllabus-header" onclick="toggleSyllabus(this)">
+                    <h4>CS3223: Deep Neural Networks</h4>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="syllabus-content active">
+                    <p><strong>L-T-P-C:</strong> 3-0-0 | <strong>Credits:</strong> 3</p>
+                    <p><strong>Prerequisites:</strong> Basic Python, Linear Algebra, Calculus, ML fundamentals</p>
+                    
+                    <span class="unit-title">Unit 1: Fundamentals of Artificial Neural Networks</span>
+                    <p class="unit-content">Introduction to biological neurons vs artificial neurons. Perceptron learning rule, convergence theorem. Multi-layer Perceptron (MLP), Activation functions (Sigmoid, ReLU, Tanh). Backpropagation algorithm and Mathematical derivation.</p>
+                    
+                    <span class="unit-title">Unit 2: Optimization and Regularization</span>
+                    <p class="unit-content">Gradient Descent variants (Stochastic, Mini-batch). Hyperparameter tuning. Regularization techniques: L1, L2, Dropout, Batch Normalization. Initialization strategies (Xavier, He).</p>
+                    
+                    <span class="unit-title">Unit 3: Convolutional Neural Networks (CNN)</span>
+                    <p class="unit-content">Spatial patterns and Convolutional layers. Pooling layers. Popular architectures: AlexNet, VGG, ResNet, Inception. Applications in Image Classification and Object Detection.</p>
+                    
+                    <span class="unit-title">Unit 4: Recurrent Neural Networks (RNN)</span>
+                    <p class="unit-content">Sequence modeling. Vanishing and Exploding gradients. LSTM (Long Short-Term Memory) and GRU (Gated Recurrent Units). Bidirectional RNNs. Applications in Time-series and Language modeling.</p>
+                    
+                    <span class="unit-title">Unit 5: Advanced Topics and Generative Models</span>
+                    <p class="unit-content">Autoencoders and Denoising. Introduction to Generative Adversarial Networks (GANs). Attention mechanism and Transformer basics. Case studies in Computer Vision.</p>
+                    
+                    <p style="margin-top: 1.5rem;"><strong>Total Hours:</strong> 45</p>
+
+                    <div class="books-grid">
+                        <div class="books-list">
+                            <h5>Textbooks</h5>
+                            <ul>
+                                <li>"Deep Learning" by Ian Goodfellow, Yoshua Bengio, and Aaron Courville.</li>
+                                <li>"Neural Networks and Deep Learning" by Michael Nielsen.</li>
+                            </ul>
+                        </div>
+                        <div class="books-list">
+                            <h5>Reference Books</h5>
+                            <ul>
+                                <li>"Hands-On Machine Learning with Scikit-Learn, Keras, and TensorFlow" by Aurélien Géron.</li>
+                                <li>"Deep Learning with Python" by François Chollet.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="evaluation-box">
+                        <div class="eval-item"><span>Minor 1</span><b>20%</b></div>
+                        <div class="eval-item"><span>Minor 2</span><b>20%</b></div>
+                        <div class="eval-item"><span>Assignments</span><b>20%</b></div>
+                        <div class="eval-item"><span>End Semester</span><b>40%</b></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SE Syllabus -->
+            <div class="syllabus-item">
+                <div class="syllabus-header" onclick="toggleSyllabus(this)">
+                    <h4>CS3201: Software Engineering</h4>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="syllabus-content">
+                    <p><strong>L-T-P-C:</strong> 3-0-0 | <strong>Credits:</strong> 3</p>
+                    <p><strong>Prerequisites:</strong> Programming Fundamentals, Data Structures</p>
+                    
+                    <span class="unit-title">Unit 1: Process Models and SDLC</span>
+                    <p class="unit-content">Evolution of Software Engineering. Waterfall model, Incremental models, Evolutionary models. Spiral model and RAD.</p>
+                    
+                    <span class="unit-title">Unit 2: Agile Development</span>
+                    <p class="unit-content">Agile manifesto and principles. Scrum framework: Roles, Events, Artifacts. Extreme Programming (XP) and Kanban.</p>
+                    
+                    <span class="unit-title">Unit 3: Requirements and Analysis</span>
+                    <p class="unit-content">Requirement elicitation and specification. Functional and Non-functional requirements. Use Case diagrams, Data Flow Diagrams (DFD).</p>
+                    
+                    <span class="unit-title">Unit 4: Design and Architecture</span>
+                    <p class="unit-content">Software architecture patterns (MVC, Microservices). Object-oriented design principles (SOLID). Unified Modeling Language (UML) modeling.</p>
+                    
+                    <span class="unit-title">Unit 5: Testing and Maintenance</span>
+                    <p class="unit-content">Verification and Validation. White-box and Black-box testing. Integration, System, and Regression testing. Software maintenance strategies.</p>
+                    
+                    <p style="margin-top: 1.5rem;"><strong>Total Hours:</strong> 42</p>
+
+                    <div class="books-grid">
+                        <div class="books-list">
+                            <h5>Textbooks</h5>
+                            <ul>
+                                <li>"Software Engineering: A Practitioner's Approach" by Roger S. Pressman.</li>
+                                <li>"Agile Software Development" by Robert C. Martin.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="evaluation-box">
+                        <div class="eval-item"><span>Minor 1</span><b>20%</b></div>
+                        <div class="eval-item"><span>Minor 2</span><b>20%</b></div>
+                        <div class="eval-item"><span>Assignments</span><b>20%</b></div>
+                        <div class="eval-item"><span>End Semester</span><b>40%</b></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Big Data Syllabus -->
+            <div class="syllabus-item">
+                <div class="syllabus-header" onclick="toggleSyllabus(this)">
+                    <h4>CS3207: Big Data Analytics</h4>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="syllabus-content">
+                    <p><strong>L-T-P-C:</strong> 3-0-0 | <strong>Credits:</strong> 3</p>
+                    <p><strong>Prerequisites:</strong> Database Management Systems, Java/Python, Statistics</p>
+                    
+                    <span class="unit-title">Unit 1: Introduction to Big Data</span>
+                    <p class="unit-content">The 5 V's of Big Data. Distributed file systems. Introduction to Hadoop Ecosystem and HDFS architecture.</p>
+                    
+                    <span class="unit-title">Unit 2: MapReduce Framework</span>
+                    <p class="unit-content">MapReduce paradigm. Programming model, shuffle and sort. MapReduce vs SQL. Developing MapReduce jobs.</p>
+                    
+                    <span class="unit-title">Unit 3: Apache Spark</span>
+                    <p class="unit-content">Spark architecture. Resilient Distributed Datasets (RDDs). Spark SQL, Spark Streaming, and MLlib for distributed machine learning.</p>
+                    
+                    <span class="unit-title">Unit 4: NoSQL Databases</span>
+                    <p class="unit-content">CAP Theorem. Document stores (MongoDB), Key-Value stores (Redis), Columnar stores (HBase, Cassandra). Graph databases (Neo4j).</p>
+                    
+                    <span class="unit-title">Unit 5: Advanced Analytics</span>
+                    <p class="unit-content">Mining data streams. Link analysis (PageRank). Large-scale social network analysis. Real-time data processing with Kafka.</p>
+                    
+                    <p style="margin-top: 1.5rem;"><strong>Total Hours:</strong> 45</p>
+
+                    <div class="books-grid">
+                        <div class="books-list">
+                            <h5>Textbooks</h5>
+                            <ul>
+                                <li>"Hadoop: The Definitive Guide" by Tom White.</li>
+                                <li>"Learning Spark" by Holden Karau and Andy Konwinski.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="evaluation-box">
+                        <div class="eval-item"><span>Minor 1</span><b>20%</b></div>
+                        <div class="eval-item"><span>Minor 2</span><b>20%</b></div>
+                        <div class="eval-item"><span>Assignments</span><b>20%</b></div>
+                        <div class="eval-item"><span>End Semester</span><b>40%</b></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- NLP Syllabus (Elective Example) -->
+            <div class="syllabus-item">
+                <div class="syllabus-header" onclick="toggleSyllabus(this)">
+                    <h4>CS3126: Natural Language Processing</h4>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="syllabus-content">
+                    <p><strong>L-T-P-C:</strong> 3-0-0 | <strong>Credits:</strong> 3</p>
+                    <p><strong>Prerequisites:</strong> Python, Basic ML, Probability</p>
+                    
+                    <span class="unit-title">Unit 1: Text Processing Fundamentals</span>
+                    <p class="unit-content">Tokenization, Lemmatization, Stemming. Regular expressions. Language modeling and N-grams.</p>
+                    
+                    <span class="unit-title">Unit 2: Syntax and Semantics</span>
+                    <p class="unit-content">Part-of-Speech (POS) tagging. Hidden Markov Models (HMM). Context-free grammars and Dependency parsing.</p>
+                    
+                    <span class="unit-title">Unit 3: Vector Semantics and Word Embeddings</span>
+                    <p class="unit-content">Word2Vec, GloVe, FastText. Dimensionality reduction for text. TF-IDF and Cosine similarity.</p>
+                    
+                    <span class="unit-title">Unit 4: Sequence to Sequence Models</span>
+                    <p class="unit-content">Encoder-Decoder architectures. Attention mechanism. Sentiment analysis and Named Entity Recognition (NER).</p>
+                    
+                    <span class="unit-title">Unit 5: Large Language Models (LLM)</span>
+                    <p class="unit-content">The Transformer architecture (BERT, GPT). Prompt engineering. Fine-tuning models for downstream tasks.</p>
+                    
+                    <p style="margin-top: 1.5rem;"><strong>Total Hours:</strong> 40</p>
+
+                    <div class="evaluation-box">
+                        <div class="eval-item"><span>Minor 1</span><b>20%</b></div>
+                        <div class="eval-item"><span>Minor 2</span><b>20%</b></div>
+                        <div class="eval-item"><span>Assignments</span><b>20%</b></div>
+                        <div class="eval-item"><span>End Semester</span><b>40%</b></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Math Foundations for ML Syllabus -->
+            <div class="syllabus-item">
+                <div class="syllabus-header" onclick="toggleSyllabus(this)">
+                    <h4>MA3219: Mathematical Foundations for ML</h4>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="syllabus-content">
+                    <p><strong>L-T-P-C:</strong> 3-0-0 | <strong>Credits:</strong> 3</p>
+                    <p><strong>Prerequisites:</strong> Linear Algebra, Calculus, Probability</p>
+                    
+                    <span class="unit-title">Unit 1: Linear Algebra Revisited</span>
+                    <p class="unit-content">Vector spaces, Basis, Rank. Eigenvalues and Eigenvectors. Matrix decompositions: SVD, PCA. Transformation matrices.</p>
+                    
+                    <span class="unit-title">Unit 2: Vector Calculus</span>
+                    <p class="unit-content">Partial derivatives, Gradients. Jacobian and Hessian matrices. Backpropagation math. Optimization techniques: Lagrangian multipliers.</p>
+                    
+                    <span class="unit-title">Unit 3: Probability and Distributions</span>
+                    <p class="unit-content">Random variables. Gaussian distribution, Bernoulli, Multinomial. Bayes' Theorem. Maximum Likelihood Estimation (MLE) and MAP.</p>
+                    
+                    <span class="unit-title">Unit 4: Optimization for ML</span>
+                    <p class="unit-content">Convex sets and functions. Constrained optimization. Gradient Descent, Newton's method. Convergence analysis.</p>
+                    
+                    <span class="unit-title">Unit 5: Information Theory and Kernels</span>
+                    <p class="unit-content">Entropy, Cross-entropy, KL Divergence. Kernel methods: Reproducing Kernel Hilbert Space (RKHS). Support Vector Machines math.</p>
+                    
+                    <p style="margin-top: 1.5rem;"><strong>Total Hours:</strong> 45</p>
+
+                    <div class="evaluation-box">
+                        <div class="eval-item"><span>Minor 1</span><b>20%</b></div>
+                        <div class="eval-item"><span>Minor 2</span><b>20%</b></div>
+                        <div class="eval-item"><span>Assignments</span><b>20%</b></div>
+                        <div class="eval-item"><span>End Semester</span><b>40%</b></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Programming Workshop Syllabus -->
+            <div class="syllabus-item">
+                <div class="syllabus-header" onclick="toggleSyllabus(this)">
+                    <h4>CS3204: Programming Workshop</h4>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="syllabus-content">
+                    <p><strong>L-T-P-C:</strong> 0-0-4-2 | <strong>Credits:</strong> 2</p>
+                    <p><strong>Prerequisites:</strong> Data Structures, Algorithms, Python/Java</p>
+                    
+                    <span class="unit-title">Unit 1: Advanced Algorithm Implementation</span>
+                    <p class="unit-content">Implementing graph algorithms (Dijkstra, A*). Dynamic programming challenges. Competitive programming paradigms.</p>
+                    
+                    <span class="unit-title">Unit 2: Full Stack Development</span>
+                    <p class="unit-content">Building REST APIs with Spring Boot/Node.js. Frontend integration with React/HTML5. Database connectivity.</p>
+                    
+                    <span class="unit-title">Unit 3: Data Analysis with Python</span>
+                    <p class="unit-content">Pandas and NumPy for data manipulation. Matplotlib/Seaborn for visualization. Exploratory Data Analysis (EDA) projects.</p>
+                    
+                    <span class="unit-title">Unit 4: Version Control and DevOps</span>
+                    <p class="unit-content">Advanced Git workflows. CI/CD pipelines with GitHub Actions. Containerization with Docker.</p>
+                    
+                    <span class="unit-title">Unit 5: Capstone Project</span>
+                    <p class="unit-content">Designing and deploying a real-world application. Documentation and unit testing. Project presentation.</p>
+                    
+                    <p style="margin-top: 1.5rem;"><strong>Total Hours:</strong> 60 (Practical)</p>
+
+                    <div class="evaluation-box">
+                        <div class="eval-item"><span>Lab Record</span><b>30%</b></div>
+                        <div class="eval-item"><span>Mid-Review</span><b>20%</b></div>
+                        <div class="eval-item"><span>Final Project</span><b>50%</b></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Computer Networks Syllabus -->
+            <div class="syllabus-item">
+                <div class="syllabus-header" onclick="toggleSyllabus(this)">
+                    <h4>CS2202: Computer Networks</h4>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="syllabus-content">
+                    <p><strong>L-T-P-C:</strong> 3-0-0-3 | <strong>Credits:</strong> 3 | <strong>Faculty:</strong> Dr. Tauheed</p>
+                    <p><strong>Prerequisites:</strong> Data Structures, Operating Systems basics</p>
+                    <span class="unit-title">Unit 1: Introduction & Physical Layer</span>
+                    <p class="unit-content">Data communication concepts, network topologies, OSI vs TCP/IP model. Transmission media: guided (twisted pair, coaxial, fiber optic) and unguided. Signal encoding, bandwidth, data rate, Nyquist and Shannon theorems.</p>
+                    <span class="unit-title">Unit 2: Data Link Layer</span>
+                    <p class="unit-content">Framing, error detection (CRC, Checksum, Hamming), error correction. Flow control: Stop-and-Wait, Sliding Window. MAC sublayer: ALOHA, CSMA/CD, CSMA/CA. Ethernet, 802.11 (Wi-Fi) standards.</p>
+                    <span class="unit-title">Unit 3: Network Layer</span>
+                    <p class="unit-content">IPv4 addressing and subnetting, CIDR. Routing algorithms: Distance Vector (RIP), Link State (OSPF), BGP. IPv6 addressing and transition. NAT, ICMP, ARP, RARP.</p>
+                    <span class="unit-title">Unit 4: Transport Layer</span>
+                    <p class="unit-content">TCP vs UDP. TCP connection establishment (3-way handshake), flow control (windowing), congestion control (Slow Start, Congestion Avoidance, Fast Retransmit). Port numbers and socket programming.</p>
+                    <span class="unit-title">Unit 5: Application Layer & Security</span>
+                    <p class="unit-content">DNS, HTTP/HTTPS, FTP, SMTP, POP3, DHCP, SNMP. Network security basics: symmetric/asymmetric encryption, TLS/SSL, firewalls, VPN, intrusion detection.</p>
+                    <p style="margin-top: 1.5rem;"><strong>Total Hours:</strong> 45</p>
+                    <div class="books-grid">
+                        <div class="books-list">
+                            <h5>Textbooks</h5>
+                            <ul>
+                                <li>"Computer Networks" by Andrew S. Tanenbaum (5th Ed.)</li>
+                                <li>"Data Communications and Networking" by Behrouz Forouzan</li>
+                            </ul>
+                        </div>
+                        <div class="books-list">
+                            <h5>Reference Books</h5>
+                            <ul>
+                                <li>"Computer Networking: A Top-Down Approach" by Kurose & Ross</li>
+                                <li>"TCP/IP Illustrated" by W. Richard Stevens</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="evaluation-box">
+                        <div class="eval-item"><span>Minor 1</span><b>20%</b></div>
+                        <div class="eval-item"><span>Minor 2</span><b>20%</b></div>
+                        <div class="eval-item"><span>Assignments</span><b>20%</b></div>
+                        <div class="eval-item"><span>End Semester</span><b>40%</b></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Information Security Syllabus -->
+            <div class="syllabus-item">
+                <div class="syllabus-header" onclick="toggleSyllabus(this)">
+                    <h4>CS4179: Information Security & Risk Assessment</h4>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="syllabus-content">
+                    <p><strong>L-T-P-C:</strong> 3-0-0-3 | <strong>Credits:</strong> 3 | <strong>Faculty:</strong> Dr. Raghu Kishore</p>
+                    <p><strong>Prerequisites:</strong> Computer Networks, Operating Systems</p>
+                    <span class="unit-title">Unit 1: Foundations of Information Security</span>
+                    <p class="unit-content">CIA Triad (Confidentiality, Integrity, Availability). Security threats and vulnerabilities. Attack taxonomy: passive vs active attacks. Security policies and models (Bell-LaPadula, Biba).</p>
+                    <span class="unit-title">Unit 2: Cryptographic Techniques</span>
+                    <p class="unit-content">Symmetric encryption: DES, 3DES, AES. Asymmetric encryption: RSA, Diffie-Hellman. Hash functions: MD5, SHA family. Digital signatures and certificates. PKI infrastructure.</p>
+                    <span class="unit-title">Unit 3: Network Security</span>
+                    <p class="unit-content">Firewalls: packet filtering, stateful inspection, application proxy. Intrusion Detection/Prevention Systems (IDS/IPS). VPN: IPSec, SSL/TLS. Wireless network security: WEP, WPA2, WPA3.</p>
+                    <span class="unit-title">Unit 4: Risk Assessment & Management</span>
+                    <p class="unit-content">Risk identification and analysis (qualitative and quantitative). Threat modeling (STRIDE, PASTA). Vulnerability assessment: CVSS scoring. Business continuity and disaster recovery planning.</p>
+                    <span class="unit-title">Unit 5: Compliance & Ethical Hacking</span>
+                    <p class="unit-content">Security standards: ISO 27001, NIST, GDPR. Penetration testing lifecycle. Common vulnerabilities: SQL injection, XSS, CSRF. Incident response procedures and digital forensics overview.</p>
+                    <p style="margin-top: 1.5rem;"><strong>Total Hours:</strong> 45</p>
+                    <div class="books-grid">
+                        <div class="books-list">
+                            <h5>Textbooks</h5>
+                            <ul>
+                                <li>"Information Security: Principles and Practice" by Mark Stamp</li>
+                                <li>"Computer Security: Art and Science" by Matt Bishop</li>
+                            </ul>
+                        </div>
+                        <div class="books-list">
+                            <h5>Reference Books</h5>
+                            <ul>
+                                <li>"Cryptography and Network Security" by William Stallings</li>
+                                <li>"The Web Application Hacker's Handbook" by Stuttard & Pinto</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="evaluation-box">
+                        <div class="eval-item"><span>Minor 1</span><b>20%</b></div>
+                        <div class="eval-item"><span>Minor 2</span><b>20%</b></div>
+                        <div class="eval-item"><span>Assignments</span><b>20%</b></div>
+                        <div class="eval-item"><span>End Semester</span><b>40%</b></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Reinforcement Learning Syllabus -->
+            <div class="syllabus-item">
+                <div class="syllabus-header" onclick="toggleSyllabus(this)">
+                    <h4>CS4122: Reinforcement Learning</h4>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="syllabus-content">
+                    <p><strong>L-T-P-C:</strong> 3-0-0-3 | <strong>Credits:</strong> 3 | <strong>Faculty:</strong> Dr. Gourav</p>
+                    <p><strong>Prerequisites:</strong> Python, Probability & Statistics, Linear Algebra, Basic ML</p>
+                    <span class="unit-title">Unit 1: Foundations of RL</span>
+                    <p class="unit-content">Agent-Environment interaction. Markov Decision Processes (MDPs): states, actions, rewards, policy, value functions. Bellman equations. Exploration vs Exploitation dilemma (epsilon-greedy).</p>
+                    <span class="unit-title">Unit 2: Dynamic Programming</span>
+                    <p class="unit-content">Policy Evaluation, Policy Improvement, Policy Iteration. Value Iteration algorithm. Convergence guarantees. Generalized Policy Iteration (GPI). Applications to finite MDPs.</p>
+                    <span class="unit-title">Unit 3: Model-Free Methods</span>
+                    <p class="unit-content">Monte Carlo methods: prediction and control. Temporal Difference (TD) learning: TD(0), SARSA, Q-Learning. TD vs Monte Carlo tradeoffs. n-step TD methods.</p>
+                    <span class="unit-title">Unit 4: Function Approximation & Deep RL</span>
+                    <p class="unit-content">Linear and nonlinear function approximation. Deep Q-Network (DQN), experience replay, target networks. Policy Gradient methods: REINFORCE. Actor-Critic architectures (A3C, PPO).</p>
+                    <span class="unit-title">Unit 5: Advanced Topics & Applications</span>
+                    <p class="unit-content">Multi-agent reinforcement learning. Inverse RL and imitation learning. RL in robotics, game playing (AlphaGo, OpenAI Five), and autonomous vehicles. Ethical considerations in RL deployment.</p>
+                    <p style="margin-top: 1.5rem;"><strong>Total Hours:</strong> 42</p>
+                    <div class="books-grid">
+                        <div class="books-list">
+                            <h5>Textbooks</h5>
+                            <ul>
+                                <li>"Reinforcement Learning: An Introduction" by Sutton & Barto (2nd Ed.)</li>
+                                <li>"Deep Reinforcement Learning Hands-On" by Maxim Lapan</li>
+                            </ul>
+                        </div>
+                        <div class="books-list">
+                            <h5>Reference Books</h5>
+                            <ul>
+                                <li>"Algorithms for Reinforcement Learning" by Csaba Szepesvári</li>
+                                <li>OpenAI Spinning Up Documentation (online)</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="evaluation-box">
+                        <div class="eval-item"><span>Minor 1</span><b>20%</b></div>
+                        <div class="eval-item"><span>Minor 2</span><b>20%</b></div>
+                        <div class="eval-item"><span>Assignments</span><b>20%</b></div>
+                        <div class="eval-item"><span>End Semester</span><b>40%</b></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modern Cryptography Syllabus -->
+            <div class="syllabus-item">
+                <div class="syllabus-header" onclick="toggleSyllabus(this)">
+                    <h4>CS4178: Modern Cryptography</h4>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="syllabus-content">
+                    <p><strong>L-T-P-C:</strong> 3-0-0-3 | <strong>Credits:</strong> 3 | <strong>Faculty:</strong> Dr. Ravi Kishore</p>
+                    <p><strong>Prerequisites:</strong> Discrete Mathematics, Number Theory basics, Algorithms</p>
+                    <span class="unit-title">Unit 1: Mathematical Foundations</span>
+                    <p class="unit-content">Modular arithmetic, Euler's theorem, Fermat's little theorem. Groups, rings, fields. Primitive roots and discrete logarithm. Quadratic residues. Chinese Remainder Theorem (CRT).</p>
+                    <span class="unit-title">Unit 2: Symmetric Key Cryptography</span>
+                    <p class="unit-content">Stream ciphers: RC4, ChaCha20. Block ciphers: DES, 3DES, AES (Rijndael). Modes of operation: ECB, CBC, CTR, GCM. Padding schemes. Cryptanalysis: differential and linear attacks.</p>
+                    <span class="unit-title">Unit 3: Public Key Cryptography</span>
+                    <p class="unit-content">RSA: key generation, encryption, decryption, attacks. Diffie-Hellman key exchange. ElGamal. Elliptic Curve Cryptography (ECC): ECDH, ECDSA. Certificates and PKI.</p>
+                    <span class="unit-title">Unit 4: Cryptographic Hash Functions & Protocols</span>
+                    <p class="unit-content">MD5, SHA-1, SHA-2, SHA-3 (Keccak). HMAC, digital signatures (RSA-PSS, DSA). Zero-knowledge proofs. Commitment schemes. Secure multi-party computation.</p>
+                    <span class="unit-title">Unit 5: Post-Quantum Cryptography</span>
+                    <p class="unit-content">Quantum computing threat model (Shor's algorithm, Grover's algorithm). Lattice-based cryptography (NTRU, Kyber). Code-based cryptography (McEliece). NIST PQC standardization. Blockchain and cryptocurrency cryptography.</p>
+                    <p style="margin-top: 1.5rem;"><strong>Total Hours:</strong> 45</p>
+                    <div class="books-grid">
+                        <div class="books-list">
+                            <h5>Textbooks</h5>
+                            <ul>
+                                <li>"Introduction to Modern Cryptography" by Katz & Lindell</li>
+                                <li>"Cryptography and Network Security" by William Stallings</li>
+                            </ul>
+                        </div>
+                        <div class="books-list">
+                            <h5>Reference Books</h5>
+                            <ul>
+                                <li>"Applied Cryptography" by Bruce Schneier</li>
+                                <li>"Serious Cryptography" by Jean-Philippe Aumasson</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="evaluation-box">
+                        <div class="eval-item"><span>Minor 1</span><b>20%</b></div>
+                        <div class="eval-item"><span>Minor 2</span><b>20%</b></div>
+                        <div class="eval-item"><span>Assignments</span><b>20%</b></div>
+                        <div class="eval-item"><span>End Semester</span><b>40%</b></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- GenAI & LLM Syllabus -->
+            <div class="syllabus-item">
+                <div class="syllabus-header" onclick="toggleSyllabus(this)">
+                    <h4>CS5202: Generative AI & Large Language Models</h4>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="syllabus-content">
+                    <p><strong>L-T-P-C:</strong> 3-0-0-3 | <strong>Credits:</strong> 3 | <strong>Faculty:</strong> Dr. Nidhi</p>
+                    <p><strong>Prerequisites:</strong> Deep Neural Networks, Linear Algebra, Python</p>
+                    <span class="unit-title">Unit 1: Transformer Architecture Deep Dive</span>
+                    <p class="unit-content">Self-attention mechanism, multi-head attention. Positional encodings. Encoder-decoder vs decoder-only architectures. Layer normalization, feed-forward sublayers. Scaling laws for language models.</p>
+                    <span class="unit-title">Unit 2: Pre-training & Fine-tuning LLMs</span>
+                    <p class="unit-content">Masked Language Modeling (BERT). Causal Language Modeling (GPT family). Next-sentence prediction. Instruction tuning, RLHF (Reinforcement Learning from Human Feedback). LoRA and parameter-efficient fine-tuning.</p>
+                    <span class="unit-title">Unit 3: Generative Models</span>
+                    <p class="unit-content">Variational Autoencoders (VAEs): reparameterization trick, ELBO. Generative Adversarial Networks (GANs): mode collapse, training instability. Diffusion models: DDPM, score matching. Image generation with Stable Diffusion.</p>
+                    <span class="unit-title">Unit 4: Prompt Engineering & RAG</span>
+                    <p class="unit-content">Zero-shot, few-shot, chain-of-thought prompting. Retrieval Augmented Generation (RAG) pipeline. Vector databases (Pinecone, ChromaDB). LangChain and LlamaIndex frameworks. Agents and tool use.</p>
+                    <span class="unit-title">Unit 5: Ethics, Safety & Deployment</span>
+                    <p class="unit-content">Hallucination and factual grounding. Bias and fairness in LLMs. Constitutional AI and alignment. Model evaluation: BLEU, ROUGE, BERTScore, human eval. Deployment: quantization, ONNX, API design.</p>
+                    <p style="margin-top: 1.5rem;"><strong>Total Hours:</strong> 42</p>
+                    <div class="books-grid">
+                        <div class="books-list">
+                            <h5>Textbooks</h5>
+                            <ul>
+                                <li>"Build a Large Language Model (From Scratch)" by Sebastian Raschka</li>
+                                <li>"Generative Deep Learning" by David Foster (2nd Ed.)</li>
+                            </ul>
+                        </div>
+                        <div class="books-list">
+                            <h5>Reference Books</h5>
+                            <ul>
+                                <li>"Natural Language Processing with Transformers" by Lewis Tunstall et al.</li>
+                                <li>Hugging Face Documentation & Papers with Code (online)</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="evaluation-box">
+                        <div class="eval-item"><span>Minor 1</span><b>20%</b></div>
+                        <div class="eval-item"><span>Minor 2</span><b>20%</b></div>
+                        <div class="eval-item"><span>Assignments</span><b>20%</b></div>
+                        <div class="eval-item"><span>End Semester</span><b>40%</b></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Computer Networks Lab Syllabus -->
+            <div class="syllabus-item">
+                <div class="syllabus-header" onclick="toggleSyllabus(this)">
+                    <h4>CS2202L: Computer Networks Lab</h4>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="syllabus-content">
+                    <p><strong>L-T-P-C:</strong> 0-0-3-1.5 | <strong>Credits:</strong> 2 | <strong>Faculty:</strong> Dr. Tauheed (New Faculty)</p>
+                    <p><strong>Prerequisites:</strong> Computer Networks (CS2202) — co-requisite</p>
+                    <span class="unit-title">Unit 1: Network Simulation Tools</span>
+                    <p class="unit-content">Introduction to Cisco Packet Tracer and GNS3. Configuring routers and switches. Basic LAN setup with DHCP and static IPs. Capturing packets using Wireshark.</p>
+                    <span class="unit-title">Unit 2: Routing & Switching Experiments</span>
+                    <p class="unit-content">Static and dynamic routing (RIP, OSPF) configuration. VLAN configuration and inter-VLAN routing. Spanning Tree Protocol (STP). Access Control Lists (ACLs).</p>
+                    <span class="unit-title">Unit 3: Transport & Application Layer Labs</span>
+                    <p class="unit-content">Socket programming in Python (TCP and UDP). HTTP server implementation. FTP and DNS server configuration. Implementing a simple chat application.</p>
+                    <span class="unit-title">Unit 4: Network Security Labs</span>
+                    <p class="unit-content">Firewall configuration (iptables). VPN setup (OpenVPN). Implementing TLS in Python (ssl module). Basic penetration testing: port scanning with Nmap, packet crafting with Scapy.</p>
+                    <span class="unit-title">Unit 5: Mini-Project</span>
+                    <p class="unit-content">End-to-end network design and implementation. Students design a scalable campus network topology, implement it in a simulator, and present analysis of performance and security trade-offs.</p>
+                    <p style="margin-top: 1.5rem;"><strong>Total Hours:</strong> 45 (Lab sessions)</p>
+                    <div class="evaluation-box">
+                        <div class="eval-item"><span>Lab Record</span><b>30%</b></div>
+                        <div class="eval-item"><span>Viva</span><b>20%</b></div>
+                        <div class="eval-item"><span>Mini-Project</span><b>50%</b></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Introduction to Professional Development Syllabus -->
+            <div class="syllabus-item">
+                <div class="syllabus-header" onclick="toggleSyllabus(this)">
+                    <h4>HS3201: Introduction to Professional Development</h4>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="syllabus-content">
+                    <p><strong>L-T-P-C:</strong> 1-0-0-1 | <strong>Credits:</strong> 1 | <strong>Faculty:</strong> Multiple (Thursdays)</p>
+                    <p><strong>Prerequisites:</strong> None (Open to all branches)</p>
+                    <span class="unit-title">Unit 1: Communication & Presentation Skills</span>
+                    <p class="unit-content">Technical report writing. IEEE/ACM paper structure. Presentation skills and slide design. Active listening and constructive feedback techniques.</p>
+                    <span class="unit-title">Unit 2: Career Planning & Industry Readiness</span>
+                    <p class="unit-content">Resume and LinkedIn profile crafting. Interview skills: technical and HR rounds. SWOT analysis for personal career planning. Industry certifications and skill roadmaps.</p>
+                    <span class="unit-title">Unit 3: Ethics & Professional Responsibility</span>
+                    <p class="unit-content">Engineering code of ethics (IEEE/ACM). Intellectual property and plagiarism. Workplace diversity and inclusion. Corporate social responsibility (CSR).</p>
+                    <span class="unit-title">Unit 4: Teamwork & Leadership</span>
+                    <p class="unit-content">Agile team dynamics. Conflict resolution strategies. Leadership styles and situational leadership. Managing remote and cross-functional teams.</p>
+                    <span class="unit-title">Unit 5: Entrepreneurship & Innovation</span>
+                    <p class="unit-content">Startup ecosystem overview. Ideation and design thinking. Business model canvas. Funding avenues: bootstrapping, angel, VC. Introduction to patents and IP filing.</p>
+                    <p style="margin-top: 1.5rem;"><strong>Total Hours:</strong> 15</p>
+                    <div class="evaluation-box">
+                        <div class="eval-item"><span>Attendance</span><b>20%</b></div>
+                        <div class="eval-item"><span>Assignments</span><b>40%</b></div>
+                        <div class="eval-item"><span>Presentation</span><b>40%</b></div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+    </div>
+
+    <footer style="background: var(--primary); color: white; padding: 3rem 2rem; text-align: center;">
+        <p>&copy; 2026 Academic ERP Systems. All rights reserved.</p>
+        <p style="font-size: 0.8rem; opacity: 0.6; margin-top: 1rem;">Designed for 6th Semester B.Tech Students</p>
+    </footer>
+
+    <script>
+        function toggleSyllabus(header) {
+            const content = header.nextElementSibling;
+            const icon = header.querySelector('i');
+            
+            // Toggle active class
+            content.classList.toggle('active');
+            
+            // Rotate icon
+            if (content.classList.contains('active')) {
+                icon.style.transform = 'rotate(180deg)';
+                content.style.display = 'block';
+            } else {
+                icon.style.transform = 'rotate(0deg)';
+                content.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>

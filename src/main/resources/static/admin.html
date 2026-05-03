@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | GALEX</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <div class="topbar">
+        GALEX Elective Registration System
+    </div>
+
+    <div class="layout">
+
+        <div class="sidebar">
+            <div class="profile">
+                <div class="avatar-container">
+                    <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Admin" alt="Admin Avatar">
+                </div>
+                <h3 id="username">Admin</h3>
+                <p>System Administrator</p>
+            </div>
+
+            <ul class="menu">
+                <li class="active">Dashboard</li>
+                <li>Manage Courses</li>
+                <li>Assign Professors</li>
+                <li>Student Records</li>
+                <li onclick="logout()">Logout</li>
+            </ul>
+        </div>
+
+        <div class="content">
+            <h2>Admin Dashboard</h2>
+
+            <div class="card">
+                <h3>Create Elective Subjects</h3>
+                <p>Define new program and liberal elective subjects for the upcoming academic session.</p>
+            </div>
+
+            <div class="card">
+                <h3>Assign Professors</h3>
+                <p>Allocate faculty members to specific elective courses and manage their access.</p>
+            </div>
+
+            <div class="card">
+                <h3>Registration Deadline</h3>
+                <p>Configure the window for elective selection and manage system-wide notifications.</p>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        const localUser = JSON.parse(localStorage.getItem("user"));
+        if (localUser) {
+            if (document.getElementById("username")) document.getElementById("username").textContent = localUser.name;
+        }
+    </script>
+
+</body>
+
+</html>
